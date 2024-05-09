@@ -44,7 +44,7 @@ class StackGanStage2(object):
         self.stage2_discriminator_optimizer = Adam(lr=stage2_discriminator_lr, beta_1=0.5, beta_2=0.999)
         self.stage1_generator = generator.stage1_generator()
         self.stage1_generator.compile(loss='binary_crossentropy', optimizer=self.stage2_generator_optimizer)
-        self.stage1_generator.load_weights('/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_gen.h5')
+        self.stage1_generator.load_weights('/Users/tharun/Desktop/stackGAN/Data/weights/stage1_gen.h5')
         self.stage2_generator = generator.build_stage2_generator()
         self.stage2_generator.compile(loss='binary_crossentropy', optimizer=self.stage2_generator_optimizer)
         self.stage2_discriminator = Discriminator().stage2_discriminator()
@@ -61,7 +61,7 @@ class StackGanStage2(object):
 
 
     def train_stage2(self):
-        data_dir = "/Users/tejasree/Downloads/birds_implementation-3/birds"
+        data_dir = "/Users/tharun/Desktop/stackGAN/Data/birds"
         train_dir = data_dir + "/train"
         test_dir = data_dir + "/test"
         embeddings_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
@@ -70,7 +70,7 @@ class StackGanStage2(object):
         filename_path_test = test_dir + "/filenames.pickle"
         class_id_path_train = train_dir + "/class_info.pickle"
         class_id_path_test = test_dir + "/class_info.pickle"
-        dataset_path = "/Users/tejasree/Downloads/birds_implementation-3/CUB_200_2011/CUB_200_2011"
+        dataset_path = "Users/tharun/Desktop/stackGAN/Data/CUB_200_2011/CUB_200_2011"
         #Trains Stage 2 StackGAN.
         x_high_train, y_high_train, high_train_embeds = Utility.load_data(filename_path=filename_path_train,
                                                                   class_id_path=class_id_path_train,
@@ -153,18 +153,18 @@ class StackGanStage2(object):
 
                     for i, image in enumerate(high_fake_images[:10]):
                         Utility.save_image(image,
-                                   f'/Users/tejasree/Downloads/birds_implementation-3/results_stage2/2nd_{self.batch_size}_{epoch}_{i}.png')
+                                   f'/Users/tharun/Desktop/stackGAN/Data/results_stage2/2nd_{self.batch_size}_{epoch}_{i}.png')
 
                 if epoch % 10 == 0:
                     self.stage2_generator.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_gen.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage2_gen.h5')
                     self.stage2_discriminator.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_disc.h5')
-                    self.ca_network.save_weights('/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_ca.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage2_disc.h5')
+                    self.ca_network.save_weights('/Users/tharun/Desktop/stackGAN/Data/weights/stage2_ca.h5')
                     self.embedding_compressor.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_embco.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage2_embco.h5')
                     self.stage2_adversarial.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_adv.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage2_adv.h5')
         try:
             plt.figure(figsize=(10,5))
             plt.plot(g_loss_stage2,self.epochs, label="Generator Loss",color='blue')
@@ -175,5 +175,5 @@ class StackGanStage2(object):
             plt.show()
         except:
             pass
-        self.stage2_generator.save_weights('/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_gen.h5')
-        self.stage2_discriminator.save_weights("/Users/tejasree/Downloads/birds_implementation-3/weights/stage2_disc.h5")
+        self.stage2_generator.save_weights('/Users/tharun/Desktop/stackGAN/Data/weights/stage2_gen.h5')
+        self.stage2_discriminator.save_weights("/Users/tharun/Desktop/stackGAN/Data/weights/stage2_disc.h5")
