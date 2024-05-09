@@ -25,7 +25,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 class StackGanStage1(object):
-    data_dir = "/Users/tejasree/Downloads/birds_implementation-3/birds"
+    data_dir = "/Users/tharun/Desktop/stackGAN/Data/birds"
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     embeddings_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
@@ -34,7 +34,7 @@ class StackGanStage1(object):
     filename_path_test = test_dir + "/filenames.pickle"
     class_id_path_train = train_dir + "/class_info.pickle"
     class_id_path_test = test_dir + "/class_info.pickle"
-    dataset_path = "/Users/tejasree/Downloads/birds_implementation-3/CUB_200_2011/CUB_200_2011"
+    dataset_path = "/Users/tharun/Desktop/stackGAN/Data/CUB_200_2011/CUB_200_2011"
 
    
     def __init__(self, epochs=100, z_dim=100, batch_size=64, enable_function=True, stage1_generator_lr=0.001,
@@ -123,26 +123,26 @@ class StackGanStage1(object):
                     gen_images, _ = self.stage1_generator.predict_on_batch([embedding_batch, latent_space])
                     try:
                         for i, image in enumerate(gen_images[:10]):
-                            Utility.save_image(image, f'/Users/tejasree/Downloads/birds_implementation-3/birds/test/gen_1_{epoch}_{i}')
+                            Utility.save_image(image, f'/Users/tharun/Desktop/stackGAN/Data/birds/test/gen_1_{epoch}_{i}')
                     except:
                         pass
                 if epoch % 10 == 0:
                     self.stage1_generator.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_gen.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage1_gen.h5')
                     self.stage1_discriminator.save_weights(
-                        "/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_disc.h5")
-                    self.ca_network.save_weights('/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_ca.h5')
+                        "/Users/tharun/Desktop/stackGAN/Data/weights/stage1_disc.h5")
+                    self.ca_network.save_weights('/Users/tharun/Desktop/stackGAN/Data/weights/stage1_ca.h5')
                     self.embedding_compressor.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_embco.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage1_embco.h5')
                     self.stage1_adversarial.save_weights(
-                        '/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_adv.h5')
+                        '/Users/tharun/Desktop/stackGAN/Data/weights/stage1_adv.h5')
                 if epoch>= 100 and epoch%100 ==0:
                     load_epoch = epoch-(epoch % 100)
-                    self.stage1_generator.load_weights(f'/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_gen_epoch_{load_epoch}.h5')
-                    self.stage1_discriminator.load_weights(f"/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_disc_epoch_{load_epoch}.h5")
-                    self.ca_network.load_weights(f'/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_ca_epoch_{load_epoch}.h5')
-                    self.embedding_compressor.load_weights(f'/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_embco_epoch_{load_epoch}.h5')
-                    self.stage1_adversarial.load_weights(f'/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_adv_epoch_{load_epoch}.h5')
+                    self.stage1_generator.load_weights(f'/Users/tharun/Desktop/stackGAN/Data/weights/stage1_gen_epoch_{load_epoch}.h5')
+                    self.stage1_discriminator.load_weights(f"/Users/tharun/Desktop/stackGAN/Data/weights/stage1_disc_epoch_{load_epoch}.h5")
+                    self.ca_network.load_weights(f'/Users/tharun/Desktop/stackGAN/Data/weights/stage1_ca_epoch_{load_epoch}.h5')
+                    self.embedding_compressor.load_weights(f'/Users/tharun/Desktop/stackGAN/Data/weights/stage1_embco_epoch_{load_epoch}.h5')
+                    self.stage1_adversarial.load_weights(f'/Users/tharun/Desktop/stackGAN/Data/weights/stage1_adv_epoch_{load_epoch}.h5')
         try:
             plt.figure(figsize=(10, 5))
             plt.plot(gen_loss, self.epochs, label="Generator Loss", color='blue')
@@ -160,5 +160,5 @@ class StackGanStage1(object):
             plt.show()
         except:
             pass
-        self.stage1_generator.save_weights('/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_gen.h5')
-        self.stage1_discriminator.save_weights("/Users/tejasree/Downloads/birds_implementation-3/weights/stage1_disc.h5")
+        self.stage1_generator.save_weights('/Users/tharun/Desktop/stackGAN/Data/weights/stage1_gen.h5')
+        self.stage1_discriminator.save_weights("/Users/tharun/Desktop/stackGAN/Data/weights/stage1_disc.h5")
