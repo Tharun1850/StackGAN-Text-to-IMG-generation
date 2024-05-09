@@ -89,7 +89,7 @@ class Utility:
     @staticmethod
     def load_data(filename_path, class_id_path, dataset_path, embeddings_path, size):
 
-        data_dir = "/Users/tejasree/Downloads/birds_implementation-3/birds"
+        data_dir = "/Users/tharun/Desktop/stackGAN/Data/birds"
         train_dir = data_dir + "/train"
         test_dir = data_dir + "/test"
         embeddings_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
@@ -98,7 +98,7 @@ class Utility:
         filename_path_test = test_dir + "/filenames.pickle"
         class_id_path_train = train_dir + "/class_info.pickle"
         class_id_path_test = test_dir + "/class_info.pickle"
-        dataset_path = "/Users/tejasree/Downloads/birds_implementation-3/CUB_200_2011/CUB_200_2011"
+        dataset_path = "//Users/tharun/Desktop/stackGAN/Data/CUB_200_2011/CUB_200_2011"
         class_id, filenames = Utility.load_class_ids_filenames(class_id_path, filename_path)
         embeddings = Utility.load_text_embeddings(embeddings_path)
         bbox_dict = Utility.load_bbox(dataset_path)
