@@ -39,7 +39,7 @@ def runStackGAN():
     stage2.train_stage2()
 
     # Path to the folder containing your generated images
-    folder_path = '/Users/tejasree/Downloads/Stage2Results50epoch'
+    folder_path = 'Users/tharun/Desktop/stackGAN/Data/Stage2Results50epoch'
     inception_score = InceptionScore()
     # Load images
     generated_images = inception_score.load_images_from_folder(folder_path)
